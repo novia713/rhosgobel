@@ -4,9 +4,9 @@
 If you have no alias defined, you can do nothing with this
 
 <h4>Requisites</h4>
-- drush! :-)
-- #gem install green_shoes
-- 
+- drush
+- green_shoes [#gem install green_shoes]
+
 <h4>Usage examples</h4>
 - "cc all" button clears cache
 - "cron" button executes cron
