@@ -1,6 +1,6 @@
 <h1>RHOSGOBEL</h1>
 
-<h2>Gui in Ruby + GTK2 assistant for Drush</h2>
+<h2>GUI assistant for Drush</h2>
 
 <h4>Requisites</h4>
 - #gem install green_shoes
