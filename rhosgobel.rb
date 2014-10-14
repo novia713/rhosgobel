@@ -13,7 +13,8 @@ rescue LoadError
 end
 
 def go( a, c)
-    @box.text = "working ..."
+    return nil if @alias.nil?
+    @btn.text = "working ..."
     @lowtext.text = "working ..."
     out = `drush @#{a} #{c} 2>&1 | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g"`
     @box.text = out
@@ -51,14 +52,17 @@ end
        	   image "drush_logo.png"
    end
      
-   # textbox
+   # textbox 
    stack width: 530 do
      @line = edit_line width: 530
+       keypress do |key| 
+         go(@alias, @line.text) if (key == "\n")
+       end
    end
      
    # button
    stack width: 70 do
-     button "Execute" do
+     @btn = button "Execute" do
          #pp @line.text
          if @line.text != "" then
             go(@alias,@line.text)
