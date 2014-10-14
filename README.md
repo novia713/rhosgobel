@@ -17,3 +17,9 @@ If you have no alias defined, you can do nothing with this
 - write "help" in textbox and then click on "execute" → shows drush help
 
 ![alt tag](http://pix.toile-libre.org/upload/original/1413288897.png)
+
+<h2>License</h2>
+&copy; Leandro 2014
+
+I feel so dirty about this :/
+do whatever you want with your life and this
