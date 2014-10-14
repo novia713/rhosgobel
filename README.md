@@ -1,8 +1,10 @@
 <h1>RHOSGOBEL</h1>
 
 <h2>GUI assistant for Drush</h2>
+If you have no alias defined, you can do nothing with this
 
 <h4>Requisites</h4>
+- drush! :-)
 - #gem install green_shoes
 - 
 <h4>Usage examples</h4>
