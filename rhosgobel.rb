@@ -1,4 +1,5 @@
- # -*- coding: utf-8
+#!/usr/bin/ruby
+# -*- coding: utf-8
 
  #gem install green_shoes
  require 'pp'
@@ -14,7 +15,7 @@ end
 
 def go( a, c)
     return nil if @alias.nil?
-    @btn.text = "working ..."
+    @box.text = "working ..."
     @lowtext.text = "working ..."
     out = `drush @#{a} #{c} 2>&1 | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g"`
     @box.text = out
@@ -27,26 +28,40 @@ end
 @box     = nil
 @lowtext = nil
 
+    
  Shoes.app :title=> "Rhosgobel :: Drush Assistant", :height=> 503 do
-        
+     
+   #general
    background "#DFA".."#FDA"
+     
    #combo
-   stack width: 430 do 
-	 
-     para "Choose an alias:"
-     list_box items: sa.split("\n"), choose: "none" do |list|
+   flow width: 330 do 	
+     para "Choose an alias:"; list_box items: sa.split("\n"), choose: "none" do |list|
        @alias = list.text
        go(@alias, 'st')
      end
    end
    # cc, cron
-   flow width: 170, align: 'right' do
+   flow width: 270 do
            button "cc all" do
        		 go(@alias, 'cc all') unless @alias.nil?
            end
 
            button "cron" do
              go(@alias, 'core-cron') unless @alias.nil?
+           end
+       
+       	   button "about", stroke: burlywood do
+             Shoes.app title: "Rhosgobel", width: 200, height: 200 do 
+              #background image "rabbitwarren.png"
+              background "#DFA".."#FDA"
+              stack do
+                img = image "rabbitwarren.png"
+                img.move 30, 10
+                para "(c) 2014 leandro@leandro.org", align: 'center', stroke: darkslateblue, top: 140
+
+              end
+             end
            end
        
        	   image "drush_logo.png"
@@ -78,5 +93,3 @@ end
 
    end
  end
-
-
