@@ -1,10 +1,10 @@
 #!/usr/bin/ruby
 # -*- coding: utf-8
 
- #gem install green_shoes
- require 'pp'
- sa = `drush sa`
- #pp sa.split("\n");
+#gem install green_shoes
+require 'pp'
+sa = `drush sa`
+#pp sa.split("\n");
 
 begin
  require 'green_shoes'
@@ -33,6 +33,7 @@ end
      
    #general
    background "#DFA".."#FDA"
+   #icon "rabbitwarren.png"
      
    #combo
    flow width: 330 do 	
@@ -51,8 +52,9 @@ end
              go(@alias, 'core-cron') unless @alias.nil?
            end
        
-       	   button "about", stroke: burlywood do
-             Shoes.app title: "Rhosgobel", width: 200, height: 200 do 
+       	   logo_about = image "drush_logo.png"
+       	   logo_about.click{
+           	  Shoes.app title: "Rhosgobel", width: 200, height: 200 do 
               #background image "rabbitwarren.png"
               background "#DFA".."#FDA"
               stack do
@@ -61,10 +63,8 @@ end
                 para "(c) 2014 leandro@leandro.org", align: 'center', stroke: darkslateblue, top: 140
 
               end
-             end
-           end
-       
-       	   image "drush_logo.png"
+              end
+           }
    end
      
    # textbox 
@@ -79,11 +79,11 @@ end
    stack width: 70 do
      @btn = button "Execute" do
          #pp @line.text
-         if @line.text != "" then
+         if ( @line.text != ""  && @line.text != "none") then
             go(@alias,@line.text)
             # system('ls -al', :out => ['/tmp/log', 'a'], :err => ['/tmp/log', 'a'])
          end
-       end
+            end
    end
        
    # textarea
