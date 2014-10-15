@@ -52,8 +52,8 @@ end
              go(@alias, 'core-cron') unless @alias.nil?
            end
        
-       	   logo_about = image "drush_logo.png"
-       	   logo_about.click{
+       	   @logo_about = image "drush_logo.png"
+       	   @logo_about.click{
            	  Shoes.app title: "Rhosgobel", width: 200, height: 200 do 
               #background image "rabbitwarren.png"
               background "#DFA".."#FDA"
@@ -78,12 +78,14 @@ end
    # button
    stack width: 70 do
      @btn = button "Execute" do
+         @logo_about = image "spinner.gif"
          #pp @line.text
          if ( @line.text != ""  && @line.text != "none") then
             go(@alias,@line.text)
             # system('ls -al', :out => ['/tmp/log', 'a'], :err => ['/tmp/log', 'a'])
          end
-            end
+         @logo_about = image "drush_logo.png"
+     end
    end
        
    # textarea
