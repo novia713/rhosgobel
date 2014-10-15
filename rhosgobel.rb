@@ -27,6 +27,7 @@ end
 @alias   = nil
 @box     = nil
 @lowtext = nil
+@logo_about = nil
 
     
  Shoes.app :title=> "Rhosgobel :: Drush Assistant", :height=> 503 do
@@ -36,19 +37,20 @@ end
    #icon "rabbitwarren.png"
      
    #combo
-   flow width: 330 do 	
+   flow width: 455 do 	
      para "Choose an alias:"; list_box items: sa.split("\n"), choose: "none" do |list|
        @alias = list.text
        go(@alias, 'st')
      end
    end
    # cc, cron
-   flow width: 270 do
-           button "cc all" do
+   flow width: 145 do
+           button "cc all", margin_top: 20 do
        		 go(@alias, 'cc all') unless @alias.nil?
            end
+       
 
-           button "cron" do
+           button "cron", margin_top: 20 do
              go(@alias, 'core-cron') unless @alias.nil?
            end
        
@@ -69,7 +71,7 @@ end
      
    # textbox 
    stack width: 530 do
-     @line = edit_line width: 530
+     @line = edit_line  width: 530
        keypress do |key| 
          go(@alias, @line.text) if (key == "\n")
        end
@@ -78,13 +80,11 @@ end
    # button
    stack width: 70 do
      @btn = button "Execute" do
-         @logo_about = image "spinner.gif"
-         #pp @line.text
+
          if ( @line.text != ""  && @line.text != "none") then
             go(@alias,@line.text)
             # system('ls -al', :out => ['/tmp/log', 'a'], :err => ['/tmp/log', 'a'])
          end
-         @logo_about = image "drush_logo.png"
      end
    end
        
