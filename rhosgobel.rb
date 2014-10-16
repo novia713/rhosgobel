@@ -3,6 +3,9 @@
 
 #gem install green_shoes
 require 'pp'
+require 'open3'
+require 'io/wait'
+
 sa = `drush sa`
 #pp sa.split("\n");
 
@@ -15,13 +18,25 @@ end
 
 def go( a, c)
     return nil if @alias.nil?
-    @box.text = "working ..."
     @lowtext.text = "working ..."
-    out = `drush @#{a} #{c} 2>&1 | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g"`
-    @box.text = out
+    @box.text = "working ..."
+
+    cmd = "drush @#{a} #{c} 2>&1 | sed 's,\x1B\[[0-9;]*[a-zA-Z],,g'"
+    output_log = []
+    output_log << Time.now
+    @box.text = ""
+    
+    o, s = Open3.capture2(cmd)
+ 
+
+
+    @box.text = o.strip
+    #output_log << o.stip
+
+
     @lowtext.text = a
     
-    File.open("rhosgobel.log", 'a') {|f| f.write(out) }
+    File.open("rhosgobel.log", 'a') {|f| f.write(output_log.join('')) }
 end
 
 @alias   = nil
@@ -82,16 +97,15 @@ end
      @btn = button "Execute" do
 
          if ( @line.text != ""  && @line.text != "none") then
-            go(@alias,@line.text)
-            # system('ls -al', :out => ['/tmp/log', 'a'], :err => ['/tmp/log', 'a'])
+            go(@alias, @line.text)
          end
      end
    end
        
    # textarea
    stack do
-     @box = edit_box text: "First, please choose an alias", width: 600, height: 400
-     @lowtext = inscription "No alias selected"
+     @box = edit_box text: "First, please choose an alias", width: 600, height: 400, font: "Courier New,Bitstream Vera Sans Mono,11px"
+     @lowtext = inscription "ruby v. " + RUBY_VERSION + ", " +  RUBY_PLATFORM
 
    end
  end
