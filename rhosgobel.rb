@@ -19,11 +19,9 @@ end
 def go( a, c)
     return nil if @alias.nil?
     @lowtext.text = "working ..."
-    @box.text = "working ..."
 
     cmd = "drush @#{a} #{c} 2>&1 | sed 's,\x1B\[[0-9;]*[a-zA-Z],,g'"
-    output_log = []
-    output_log << Time.now
+    output_log = Time.now.to_s + "\n"
     @box.text = ""
     
     o, s = Open3.capture2(cmd)
@@ -31,12 +29,11 @@ def go( a, c)
 
 
     @box.text = o.strip
-    #output_log << o.stip
-
+    output_log += o.strip
 
     @lowtext.text = a
     
-    File.open("rhosgobel.log", 'a') {|f| f.write(output_log.join('')) }
+    File.open("rhosgobel.log", 'a') {|f| f.write( output_log ) }
 end
 
 @alias   = nil
@@ -104,8 +101,13 @@ end
        
    # textarea
    stack do
-     @box = edit_box text: "First, please choose an alias", width: 600, height: 400, font: "Courier New,Bitstream Vera Sans Mono,11px"
-     @lowtext = inscription "ruby v. " + RUBY_VERSION + ", " +  RUBY_PLATFORM
+     @box = edit_box text: "First, please choose an alias", 
+        width: 600, 
+        height: 400, 
+        font: "Courier New,Bitstream Vera Sans Mono,11px",
+        scroll: true,
+        fill: red
+     @lowtext = inscription "ruby v. " + RUBY_VERSION + "  [" +  RUBY_PLATFORM + "]"
 
    end
  end
