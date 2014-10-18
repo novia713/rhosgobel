@@ -66,13 +66,13 @@ end
              go(@alias, 'core-cron') unless @alias.nil?
            end
        
-       	   @logo_about = image "drush_logo.png"
+       	   @logo_about = image File.dirname(__FILE__) + "/drush_logo.png"
        	   @logo_about.click{
            	  Shoes.app title: "Rhosgobel", width: 200, height: 200 do 
               #background image "rabbitwarren.png"
               background "#DFA".."#FDA"
               stack do
-                img = image "rabbitwarren.png"
+                img = image File.dirname(__FILE__) + "/rabbitwarren.png"
                 img.move 30, 10
                 para "(c) 2014 leandro@leandro.org", align: 'center', stroke: darkslateblue, top: 140
 
